@@ -1,16 +1,6 @@
 class OctopusEnergyRatesCard extends HTMLElement {
     set hass(hass) {
         const config = this._config;
-
-    // Check if timeAndDateISO is provided, use it to calculate current time if available
-    const currentTimeISO = config.timeAndDateISO ? config.timeAndDateISO : new Date().toISOString();
-    const currentTimeParsed = Date.parse(currentTimeISO);
-    const currentTime = isNaN(currentTimeParsed) ? Date.now() : currentTimeParsed;
-
-    // Log the values to compare formats
-    console.log("timeAndDateISO:", currentTimeISO);
-    console.log("currentTime:", currentTime);
-        
         if (!this.content) {
             const card = document.createElement('ha-card');
             card.header = config.title;
@@ -141,8 +131,7 @@ class OctopusEnergyRatesCard extends HTMLElement {
         }
 
         // Check if the interval has passed
-        //const currentTime = config.timeAndDateISO ? Date.parse(config.timeAndDateISO) : Date.now();
-
+        const currentTime = Date.now();
         const cardRefreshIntervalSecondsInMilliseconds = config.cardRefreshIntervalSeconds * 1000;
         if (!(currentTime - this.lastRefreshTimestamp >= cardRefreshIntervalSecondsInMilliseconds)) {
             return
