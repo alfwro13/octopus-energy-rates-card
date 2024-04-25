@@ -141,7 +141,7 @@ class OctopusEnergyRatesCard extends HTMLElement {
         }
 
         // Check if the interval has passed
-        const currentTime = config.timeAndDateISO ? Date.parse(config.timeAndDateISO) : Date.now();
+        //const currentTime = config.timeAndDateISO ? Date.parse(config.timeAndDateISO) : Date.now();
 
         const cardRefreshIntervalSecondsInMilliseconds = config.cardRefreshIntervalSeconds * 1000;
         if (!(currentTime - this.lastRefreshTimestamp >= cardRefreshIntervalSecondsInMilliseconds)) {
