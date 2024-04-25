@@ -132,7 +132,11 @@ class OctopusEnergyRatesCard extends HTMLElement {
 
         // Check if the interval has passed
         const currentTime = config.timeAndDateISO ? Date.parse(config.timeAndDateISO) : Date.now();
-
+        
+// Check if timeAndDateISO is provided, use it to calculate current time if available
+    const currentTimeISO = config.timeAndDateISO ? config.timeAndDateISO : new Date().toISOString();
+    const currentTimeParsed = Date.parse(currentTimeISO);
+    const currentTime = isNaN(currentTimeParsed) ? Date.now() : currentTimeParsed;
         
     // Display timeAndDateISO and currentTime at the bottom of the card
     const bottomText = document.createElement('div');
