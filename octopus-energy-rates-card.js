@@ -131,7 +131,21 @@ class OctopusEnergyRatesCard extends HTMLElement {
         }
 
         // Check if the interval has passed
-        const currentTime = Date.now();
+        // Read the timeAndDateISO entity if specified
+        let currentTime;
+        if (config.timeAndDateISO) {
+            const timeAndDateEntity = hass.states[config.timeAndDateISO];
+            if (timeAndDateEntity && timeAndDateEntity.state) {
+                currentTime = Date.parse(timeAndDateEntity.state);
+            } else {
+                // If the entity is not available or doesn't have a state, fallback to current time
+                currentTime = Date.now();
+            }
+        } else {
+            // If timeAndDateISO is not specified, use current time
+            currentTime = Date.now();
+        }
+        
         const cardRefreshIntervalSecondsInMilliseconds = config.cardRefreshIntervalSeconds * 1000;
         if (!(currentTime - this.lastRefreshTimestamp >= cardRefreshIntervalSecondsInMilliseconds)) {
             return
