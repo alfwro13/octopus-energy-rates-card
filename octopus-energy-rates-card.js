@@ -133,6 +133,16 @@ class OctopusEnergyRatesCard extends HTMLElement {
         // Check if the interval has passed
         const currentTime = config.timeAndDateISO ? Date.parse(config.timeAndDateISO) : Date.now();
 
+        
+    // Display timeAndDateISO and currentTime at the bottom of the card
+    const bottomText = document.createElement('div');
+    bottomText.textContent = `timeAndDateISO: ${currentTimeISO}, currentTime: ${new Date(currentTime).toISOString()}`;
+    bottomText.style.fontSize = '12px';
+    bottomText.style.color = 'gray';
+    bottomText.style.padding = '8px';
+    this.content.appendChild(bottomText);
+
+        
         const cardRefreshIntervalSecondsInMilliseconds = config.cardRefreshIntervalSeconds * 1000;
         if (!(currentTime - this.lastRefreshTimestamp >= cardRefreshIntervalSecondsInMilliseconds)) {
             return
