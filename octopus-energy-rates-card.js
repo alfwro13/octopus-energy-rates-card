@@ -471,6 +471,8 @@ class OctopusEnergyRatesCard extends HTMLElement {
             multiplier: 100,
             // Limit display to next X rows
             rateListLimit: 0,
+            // Specify entity with time and date in ISO format
+            timeAndDateISO: null,
             // How often should the card refresh in seconds
             cardRefreshIntervalSeconds: 60
         };
